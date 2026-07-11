@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UDYOGAX | Enterprise Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body { background: #050505; color: #fff; font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); border: 1px solid #222; }
+        canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+        .flash { animation: flashEffect 0.2s; }
+        @keyframes flashEffect { 0% { background: #fff; } 100% { background: #050505; } }
+    </style>
+</head>
+<body class="transition-colors duration-100">
+
+    <canvas id="p5-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="fixed w-full p-6 flex justify-between items-center z-50 glass">
+        <div class="text-2xl font-black italic">UDYOGAX</div>
+        <nav class="flex gap-8 text-xs font-bold text-gray-400">
+            <a href="#about" class="hover:text-white">ABOUT</a>
+            <a href="#support" class="hover:text-white">SUPPORT</a>
+            <a href="#" class="hover:text-white">MENU</a>
+        </nav>
+    </header>
+
+    <main class="pt-32 pb-20 px-6 max-w-4xl mx-auto space-y-24">
+        
+        <section class="text-center">
+            <h1 class="text-7xl font-black mb-8">UDYOGAX CAREER</h1>
+            <a href="#" class="bg-white text-black px-10 py-4 rounded-full font-black hover:bg-gray-300">GET APP</a>
+        </section>
+
+        <!-- Preferred Courses -->
+        <section class="space-y-4">
+            <h2 class="text-sm font-bold text-gray-500 uppercase">Preferred Courses</h2>
+            <div class="glass p-6 rounded-2xl">10th to Degree Career Roadmap</div>
+            <div class="glass p-6 rounded-2xl">Coding & App Development</div>
+            <div class="glass p-6 rounded-2xl">cPanel & Server Management</div>
+        </section>
+
+        <!-- 2 Articles -->
+        <section class="grid md:grid-cols-2 gap-6">
+            <div class="glass p-8 rounded-2xl"><h3>Article 1: Future of Tech</h3><p class="text-gray-500 text-sm mt-2">How AI is changing the job market.</p></div>
+            <div class="glass p-8 rounded-2xl"><h3>Article 2: Career Building</h3><p class="text-gray-500 text-sm mt-2">Steps to become a full-stack developer.</p></div>
+        </section>
+
+        <!-- Support Form -->
+        <section id="support" class="glass p-10 rounded-2xl">
+            <h2 class="text-2xl font-bold mb-6">Support Form</h2>
+            <form class="space-y-4">
+                <input type="email" placeholder="Your Email" class="w-full p-4 bg-black border border-gray-800 rounded-xl">
+                <textarea placeholder="Message" class="w-full p-4 bg-black border border-gray-800 rounded-xl"></textarea>
+                <button class="w-full bg-orange-600 p-4 rounded-xl font-bold">SEND MESSAGE</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Long Footer -->
+    <footer class="p-20 border-t border-gray-900 grid md:grid-cols-4 gap-12 text-gray-600 text-xs">
+        <div><h4 class="text-white font-bold mb-2">UDYOGAX</h4><p>Leading education platform.</p></div>
+        <div><h4 class="text-white font-bold mb-2">SERVICES</h4><p>Coding, Web, App, Server.</p></div>
+        <div><h4 class="text-white font-bold mb-2">SUPPORT</h4><p>support@udyogax.com</p></div>
+        <div><h4 class="text-white font-bold mb-2">LEGAL</h4><p>© 2026 All rights reserved.</p></div>
+    </footer>
+
+    <script>
+        let balls = [];
+        function setup() { createCanvas(windowWidth, document.body.scrollHeight); }
+        
+        function mousePressed() {
+            document.body.classList.add('flash');
+            setTimeout(() => document.body.classList.remove('flash'), 200);
+            balls.push({x: mouseX, y: mouseY, vx: random(-5,5), vy: random(-5,5)});
+        }
+
+        function draw() {
+            clear();
+            stroke(255, 50);
+            // Spider Threads (Scroll Effect)
+            line(windowWidth/2, 0, mouseX, mouseY);
+            
+            for(let b of balls) {
+                fill(255); ellipse(b.x, b.y, 20);
+                b.x += b.vx; b.y += b.vy;
+            }
+        }
+    </script>
+</body>
+</html>
